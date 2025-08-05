@@ -1,12 +1,47 @@
-# React + Vite
+# Video Query Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Structure
 
-Currently, two official plugins are available:
+```
+video-query-assistant/
+├── public/
+│   ├── icons/              # App icons and favicons
+│   ├── videos/             # Sample video files
+│   └── vite.svg
+├── src/
+│   ├── components/         # React components
+│   │   ├── 
+│   ├── context/           # React context providers
+│   ├── hooks/             # Custom React hooks
+│   │   └── 
+│   ├── services/          # API and external service calls
+│   │   └── queryApi.js
+│   ├── styles/            # Global styles and themes
+│   │   └── globals.css
+│   ├── types/             # Type definitions (for future TS migration)
+│   ├── utils/             # Utility functions
+│   ├── App.jsx
+│   ├── App.css
+│   ├── main.jsx
+│   └── index.css
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. **Start development server:**
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
