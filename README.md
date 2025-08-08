@@ -34,6 +34,7 @@ video-query-assistant/
 1. **Install dependencies:**
    ```bash
    npm install
+   npm install antd
    ```
 
 2. **Start development server:**
