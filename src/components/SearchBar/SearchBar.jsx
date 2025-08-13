@@ -1,9 +1,13 @@
+import React from "react";
 import { Input } from "antd";
+
 const SearchBar = () => {
   return (
-    <>
-      <Input.Search placeholder="Input text" enterButton="Search" loading />
-    </>
+    <React.Fragment>
+      <div>
+        <Input.Search placeholder="Input text" enterButton="Search" loading />
+      </div>
+    </React.Fragment>
   );
 };
 

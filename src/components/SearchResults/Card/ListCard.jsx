@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
 import { Flex } from "antd";
+
 const ListCard = () => {
   const items = [
     {
@@ -20,13 +21,15 @@ const ListCard = () => {
     },
   ];
   return (
-    <div>
-      <Flex wrap gap="small">
-        {items.map((item) => (
-          <Card key={item.id} img={item} />
-        ))}
-      </Flex>
-    </div>
+    <React.Fragment>
+      <div>
+        <Flex wrap gap="small">
+          {items.map((item) => (
+            <Card key={item.id} img={item} />
+          ))}
+        </Flex>
+      </div>
+    </React.Fragment>
   );
 };
 
