@@ -1,13 +1,14 @@
-import React from 'react';
+import React from "react";
 import { Image } from "antd";
 
 const Card = (props) => {
-    return (
-        <div>
-            <div>{props.img.title}</div>
-            <Image src={props.img.src}/>
-        </div>
-    );
-}
+  console.log(props.img);
+  return (
+    <div>
+      <Image width={200} src={props.img.src} />
+      <div>{props.img.title}</div>
+    </div>
+  );
+};
 
 export default Card;
