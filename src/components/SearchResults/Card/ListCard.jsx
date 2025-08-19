@@ -1,23 +1,26 @@
 import React from "react";
 import Card from "./Card";
 import { Flex } from "antd";
+import img1 from '../../../assets/0112.webp';
+import img2 from '../../../assets/0175.webp';
+import img3 from '../../../assets/0232.webp';
 
 const ListCard = () => {
   const items = [
     {
       id: 1,
       title: "Card 1",
-      src: "https://pluspng.com/img-png/react-logo-png-react-js-logo-history-design-history-and-evolution-5500x3094.png",
+      src: img1,
     },
     {
       id: 2,
       title: "Card 2",
-      src: "https://pluspng.com/img-png/react-logo-png-react-js-logo-history-design-history-and-evolution-5500x3094.png",
+      src: img2,
     },
     {
       id: 3,
       title: "Card 3",
-      src: "https://pluspng.com/img-png/react-logo-png-react-js-logo-history-design-history-and-evolution-5500x3094.png",
+      src: img3,
     },
   ];
   return (
