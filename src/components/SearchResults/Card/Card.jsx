@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "antd";
+import { Image, Button } from "antd";
 import styles from "./Card.module.css";
 import { PlayCircleOutlined } from "@ant-design/icons";
 
@@ -12,7 +12,7 @@ const Card = (props) => {
           preview={{
             destroyOnHidden: true,
             imageRender: () => (
-              <div>
+              <div className={styles.previewContainer}>
                 <img
                   style={{
                     borderRadius: "8px",
@@ -20,17 +20,14 @@ const Card = (props) => {
                   src={props.img.src}
                   alt={props.img.title || ""}
                 />
-                <PlayCircleOutlined
-                  style={{
-                    borderRadius: "8px",
-                    backgroundColor: "#e6f2ff",
-                    padding: "12px 0",
-                    display: "flex",
-                    justifyContent: "center",
-                    color: "black",
-                    fontSize: "48px",
-                  }}
-                />
+                <Button
+                  className={styles.playBtn}
+                  icon={<PlayCircleOutlined />}
+                  href="https://www.youtube.com/watch?v=-nJ0WHEetsQ&t=60s"
+                  target="_blank"
+                >
+                  Play
+                </Button>
               </div>
             ),
             toolbarRender: () => null,
