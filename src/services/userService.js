@@ -1,11 +1,13 @@
-import axios from './axios';
+import axios from "./axios";
 
-const fetchRandomImages = (page) => {
-    return axios.get(`/api/users?page=${page}`)
-            }
+const fetchRandomImages = async () => {
+  try {
+    const response = await axios.get(`/api/users`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching random images:", error);
+    throw error;
+  }
+};
 
-const fetchTest = () => {
-    return axios.get(`/api/users/test`)
-            }
-
-export { fetchRandomImages, fetchTest };
+export { fetchRandomImages };

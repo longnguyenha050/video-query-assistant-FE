@@ -5,28 +5,39 @@ import { Pagination } from "antd";
 import { fetchRandomImages } from "../../../services/userService";
 import styles from "./ListCard.module.css";
 
+const PAGE_SIZE = 40;
 
 const ListCard = () => {
   const [current, setCurrent] = useState(1);
+  const [fullData, setFullData] = useState([]);
   const [data, setData] = useState([]);
   const [totalImage, setTotalImage] = useState();
 
-  const onChange = (page) => {
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    getRandomImages(current);
+  }, [current, fullData]);
+
+  const setPageData = (page) => {
     console.log(page);
     setCurrent(page);
   };
 
-  useEffect(() => {
-    getRandomImages(current);
-  }, [current]);
-
-  const getRandomImages = async (page) => {
-    const res = await fetchRandomImages(page);
-    console.log(res);
-    if (res) {
-      setData(res.data);
-      setTotalImage(res.pagination.total_items);
+  const getData = async () => {
+    console.log("Fetching random images...");
+    const data = await fetchRandomImages();
+    if (data) {
+      setTotalImage(data.total_items);
+      setFullData(data.items);
     }
+  };
+
+  const getRandomImages = (page) => {
+    const pageData = fullData.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+    setData(pageData);
   };
 
   return (
@@ -42,10 +53,10 @@ const ListCard = () => {
         <div className={styles.paginationContainer}>
           <Pagination
             current={current}
-            onChange={onChange}
+            onChange={setPageData}
             total={totalImage}
             showSizeChanger={false}
-            pageSize={40} // Số items mỗi trang
+            pageSize={PAGE_SIZE} // Số items mỗi trang
           />
         </div>
       </div>
