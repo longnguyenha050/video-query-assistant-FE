@@ -1,36 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { Flex } from "antd";
-import img1 from '../../../assets/0112.webp';
-import img2 from '../../../assets/0175.webp';
-import img3 from '../../../assets/0232.webp';
+import { Pagination } from "antd";
+import { fetchRandomImages } from "../../../services/userService";
+import styles from "./ListCard.module.css";
+
 
 const ListCard = () => {
-  const items = [
-    {
-      id: 1,
-      title: "Card 1",
-      src: img1,
-    },
-    {
-      id: 2,
-      title: "Card 2",
-      src: img2,
-    },
-    {
-      id: 3,
-      title: "Card 3",
-      src: img3,
-    },
-  ];
+  const [current, setCurrent] = useState(1);
+  const [data, setData] = useState([]);
+  const [totalImage, setTotalImage] = useState();
+
+  const onChange = (page) => {
+    console.log(page);
+    setCurrent(page);
+  };
+
+  useEffect(() => {
+    getRandomImages(current);
+  }, [current]);
+
+  const getRandomImages = async (page) => {
+    const res = await fetchRandomImages(page);
+    console.log(res);
+    if (res) {
+      setData(res.data);
+      setTotalImage(res.pagination.total_items);
+    }
+  };
+
   return (
     <React.Fragment>
-      <div>
-        <Flex wrap gap="small">
-          {items.map((item) => (
-            <Card key={item.id} img={item} />
-          ))}
-        </Flex>
+      <div className={styles.pageContainer}>
+        <div>
+          <Flex wrap gap="small">
+            {data.map((item) => (
+              <Card key={item.id} img={item} />
+            ))}
+          </Flex>
+        </div>
+        <div className={styles.paginationContainer}>
+          <Pagination
+            current={current}
+            onChange={onChange}
+            total={totalImage}
+            showSizeChanger={false}
+            pageSize={40} // Số items mỗi trang
+          />
+        </div>
       </div>
     </React.Fragment>
   );
