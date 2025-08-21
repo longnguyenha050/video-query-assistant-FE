@@ -1,16 +1,14 @@
-/* Tuỳ chỉnh cho DropMenu (nếu cần) */
 .container {
-  display: flex; /* Hiển thị các item trên cùng 1 dòng */
-  justify-content: space-between; /* 2 component cách đều 2 bên */
-  
+  display: flex; 
+  justify-content: space-between; 
 }
 
 .dropMenu {
-  min-width: 25%; /* Độ rộng tối thiểu */
+  min-width: 20%; 
 }
 
-/* Tuỳ chỉnh cho Search (nếu cần) */
 .searchBox {
-  flex-grow: 1; /* Chiếm không gian còn lại */
-  max-width: 70%; /* Giới hạn độ rộng tối đa */
+  flex-grow: 1; 
+  max-width: 70%; 
+
 }

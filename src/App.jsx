@@ -1,11 +1,11 @@
 import React from "react";
 import './App.css'
-import Content from "./components/Content/Content";
+import BodyContent from "./components/BodyContent/BodyContent";
 function App() {
 
   return (
     <React.Fragment>
-      <Content/>
+      <BodyContent/>
     </React.Fragment>
   )
 }

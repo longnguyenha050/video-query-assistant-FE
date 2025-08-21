@@ -17,7 +17,7 @@ const SingleTextSearch = () => {
         size={componentSize}
       >
         <Form.Item label="Top K">
-          <InputNumber style={{ width: "100px" }} min="0" defaultValue="10"/>
+          <InputNumber style={{ width: "120px" }} min="0" defaultValue="10"/>
         </Form.Item>
         
         <Form.Item label="Select">

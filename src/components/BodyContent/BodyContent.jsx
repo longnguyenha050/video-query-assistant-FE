@@ -1,9 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import Header from "../Header/Header";
+import SearchHeader from "../SearchHeader/SearchHeader";
 import SearchResults from "../SearchResults/SearchResults";
 import { Tabs, ConfigProvider } from "antd";
+import HistoryButton from "../HistoryButton/HistoryButton";
 
-const Content = () => {
+import { Layout } from "antd";
+const { Header, Sider, Content } = Layout;
+
+const BodyContent = () => {
   const [activeKey, setActiveKey] = useState(0);
   const [items, setItems] = useState([]);
   const newTabIndex = useRef(0);
@@ -23,17 +27,68 @@ const Content = () => {
     newPanes.push({
       label,
       children: (
-        <>
-          <Header />
-          <SearchResults />
-        </>
+        <Layout>
+          <ConfigProvider
+            theme={{
+              components: {
+                Layout: {
+                  siderBg: "#e6f2ff",
+                },
+              },
+            }}
+          >
+            <Sider width={250}>
+              <div style={{
+                padding: "20px"
+              }}>
+                <HistoryButton />
+              </div>
+              {/* <div className="demo-logo-vertical" />
+              <Menu
+                theme="dark"
+                mode="inline"
+                defaultSelectedKeys={["1"]}
+                items={[
+                  {
+                    key: "1",
+                    icon: <UserOutlined />,
+                    label: "nav 1",
+                  },
+                ]}
+              /> */}
+            </Sider>
+          </ConfigProvider>
+          <Layout
+            style={{
+              background: "#cbd7e2",
+            }}
+          >
+            <Header
+              style={{
+                padding: "0 16px",
+                background: "#cbd7e2",
+                height: "auto",
+              }}
+            >
+              <div>
+                <SearchHeader />
+              </div>
+            </Header>
+            <Content
+              style={{
+                margin: "10px 16px",
+              }}
+            >
+              <SearchResults />
+            </Content>
+          </Layout>
+        </Layout>
       ),
       key: newActiveKey,
     });
     newTabIndex.current += 1;
     setItems(newPanes);
     setActiveKey(newActiveKey);
-    console.log("newactive key: ", newPanes);
   };
 
   const remove = (targetKey) => {
@@ -75,8 +130,7 @@ const Content = () => {
   };
 
   return (
-    <div
-    >
+    <div>
       <ConfigProvider
         theme={{
           components: {
@@ -92,11 +146,11 @@ const Content = () => {
           activeKey={activeKey}
           onEdit={onEdit}
           items={items}
-          inkBar:true
+          hideAdd={false}
         />
       </ConfigProvider>
     </div>
   );
 };
 
-export default Content;
+export default BodyContent;

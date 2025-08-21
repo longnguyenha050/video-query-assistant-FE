@@ -1,8 +1,8 @@
 import React from "react";
 import DropMenu from "../DropMenu/DropMenu";
-import styles from "./Header.module.css"; // Import CSS module
+import styles from "./SearchHeader.module.css"; 
 
-const Header = () => {
+const SearchHeader = () => {
   return (
     <header className={styles.headerContainer}>
       <div>
@@ -12,4 +12,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default SearchHeader;
