@@ -1,13 +1,11 @@
 import React from "react";
 import './App.css'
-import Header from "./components/Header/Header";
-import SearchResults from "./components/SearchResults/SearchResults"
+import Content from "./components/Content/Content";
 function App() {
 
   return (
     <React.Fragment>
-      <Header />
-      <SearchResults />
+      <Content/>
     </React.Fragment>
   )
 }
