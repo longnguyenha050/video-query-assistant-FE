@@ -43,8 +43,8 @@ const ListCard = () => {
   return (
     <React.Fragment>
       <div className={styles.pageContainer}>
-        <div>
-          <Flex wrap gap="small">
+        <div className={styles.imageContainer}>
+          <Flex wrap gap="large">
             {data.map((item) => (
               <Card key={item.id} img={item} />
             ))}

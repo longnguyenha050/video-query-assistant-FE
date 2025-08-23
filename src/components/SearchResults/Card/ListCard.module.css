@@ -9,10 +9,16 @@
   background-color: #e6f2ff;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng phía trên (tùy chọn) */
 }
+
 .pageContainer {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  margin-bottom: 60px;
-  padding:1.5rem
+  height: 100%;
+  padding: 1.5rem;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
+.imageContainer {
+  height: 40rem;
 }
