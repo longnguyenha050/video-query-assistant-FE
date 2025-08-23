@@ -32,7 +32,7 @@ const BodyContent = () => {
             theme={{
               components: {
                 Layout: {
-                  siderBg: "#e6f2ff",
+                  siderBg: "#607B8B",
                 },
               },
             }}
@@ -77,6 +77,7 @@ const BodyContent = () => {
             <Content
               style={{
                 margin: "10px 16px",
+                background:"#cbd7e2"
               }}
             >
               <SearchResults />

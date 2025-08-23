@@ -4,12 +4,18 @@ const HistoryButton = () => {
   const [searchHistory, setSearchHistory] = useState(["ABC", "XYZ", "MNPQ"]);
   return (
     <>
-      <div style={{
-        padding:"5px"
-      }
-      }>
+      <div
+        style={{
+          padding: "10px 20px",
+          fontSize: "18px",
+          fontWeight: "bold",
+          color: "#fff",
+          textAlign: "center",
+        }}
+      >
         History
       </div>
+
       <Select
         size="large"
         showSearch
@@ -22,7 +28,7 @@ const HistoryButton = () => {
           }
         }}
       >
-        <Select.OptGroup label="Lịch sử tìm kiếm">
+        <Select.OptGroup label="Search History">
           {searchHistory.map((item, index) => (
             <Select.Option key={index} value={item}>
               {item}
