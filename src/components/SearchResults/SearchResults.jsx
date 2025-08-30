@@ -2,11 +2,11 @@ import React from "react";
 import ListCard from "./Card/ListCard";
 
 
-const SearchResults = () => {
+const SearchResults = ({ searchType, require, setResult }) => {
   return (
     <React.Fragment>
       <div>
-        <ListCard />
+        <ListCard searchType={searchType} require={require} setResult={setResult}  />
       </div>
     </React.Fragment>
   );

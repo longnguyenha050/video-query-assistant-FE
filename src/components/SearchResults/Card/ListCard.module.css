@@ -17,6 +17,7 @@
   padding: 1.5rem;
   overflow-y: scroll;
   scrollbar-width: thin;
+  margin-bottom: 60px;
 }
 
 .imageContainer {

@@ -1,12 +1,13 @@
 import React from "react";
-import DropMenu from "../DropMenu/DropMenu";
-import styles from "./SearchHeader.module.css"; 
+import DropMenu from "./DropMenu/DropMenu";
+import styles from "./SearchHeader.module.css";
 
-const SearchHeader = () => {
+const SearchHeader = ({ setSearchType, setRequire }) => {
+  
   return (
     <header className={styles.headerContainer}>
       <div>
-        <DropMenu />
+        <DropMenu setSearchType={setSearchType} setRequire={setRequire} />
       </div>
     </header>
   );

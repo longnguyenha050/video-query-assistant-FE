@@ -1,10 +1,9 @@
 import React from "react";
 import { Image, Button } from "antd";
-import styles from "./Card.module.css";
+import styles from "./QASearchCard.module.css";
 import { PlayCircleOutlined } from "@ant-design/icons";
 
-const Card = (props) => {
-  console.log(props.img);
+const QASearchCard = (props) => {
   return (
     <React.Fragment>
       <div className={styles.imageContainer}>
@@ -29,11 +28,12 @@ const Card = (props) => {
                 <Button
                   className={styles.playBtn}
                   icon={<PlayCircleOutlined />}
-                  href="https://www.youtube.com/watch?v=-nJ0WHEetsQ&t=60s"
+                  href={`${props.img.link}&=${props.img.timestamp}`}
                   target="_blank"
                 >
                   Play
                 </Button>
+                <div className={styles.answerPreviewContainer}>{props.img.answer}</div>
               </div>
             ),
             toolbarRender: () => null,
@@ -48,10 +48,11 @@ const Card = (props) => {
           {props.img.folder_key && props.img.video_key && props.img.frame_key
             ? `${props.img.folder_key}_${props.img.video_key}_${props.img.frame_key}`
             : ""}
+          <div className={styles.answerContainer}>{props.img.answer}</div>
         </div>
       </div>
     </React.Fragment>
   );
 };
 
-export default Card;
+export default QASearchCard;

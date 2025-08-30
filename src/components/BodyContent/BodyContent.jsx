@@ -3,14 +3,21 @@ import SearchHeader from "../SearchHeader/SearchHeader";
 import SearchResults from "../SearchResults/SearchResults";
 import { Tabs, ConfigProvider } from "antd";
 import HistoryButton from "../HistoryButton/HistoryButton";
+import SubmitButton from "../SubmitButton/SubmitButton";
 
 import { Layout } from "antd";
 const { Header, Sider, Content } = Layout;
 
 const BodyContent = () => {
+  const [tabsData, setTabsData] = useState([]);
   const [activeKey, setActiveKey] = useState(0);
   const [items, setItems] = useState([]);
   const newTabIndex = useRef(0);
+
+  useEffect(() => {
+    console.log("tabsData: ", tabsData);
+  }, [tabsData]);
+
 
   useEffect(() => {
     add();
@@ -21,75 +28,18 @@ const BodyContent = () => {
   };
 
   const add = () => {
-    const newActiveKey = `newTab${newTabIndex.current}`;
+    const key = `newTab${newTabIndex.current}`;
     const label = `New Tab ${newTabIndex.current + 1}`;
-    const newPanes = [...items];
-    newPanes.push({
+    const newTab = {
+      key,
       label,
-      children: (
-        <Layout>
-          <ConfigProvider
-            theme={{
-              components: {
-                Layout: {
-                  siderBg: "#607B8B",
-                },
-              },
-            }}
-          >
-            <Sider width={250}>
-              <div style={{
-                padding: "20px"
-              }}>
-                <HistoryButton />
-              </div>
-              {/* <div className="demo-logo-vertical" />
-              <Menu
-                theme="dark"
-                mode="inline"
-                defaultSelectedKeys={["1"]}
-                items={[
-                  {
-                    key: "1",
-                    icon: <UserOutlined />,
-                    label: "nav 1",
-                  },
-                ]}
-              /> */}
-            </Sider>
-          </ConfigProvider>
-          <Layout
-            style={{
-              background: "#cbd7e2",
-            }}
-          >
-            <Header
-              style={{
-                padding: "0 16px",
-                background: "#cbd7e2",
-                height: "auto",
-              }}
-            >
-              <div>
-                <SearchHeader />
-              </div>
-            </Header>
-            <Content
-              style={{
-                margin: "10px 16px",
-                background:"#cbd7e2"
-              }}
-            >
-              <SearchResults />
-            </Content>
-          </Layout>
-        </Layout>
-      ),
-      key: newActiveKey,
-    });
+      searchType: "Single Text Search",
+      require: {},
+      result: {},
+    };
+    setTabsData((prev) => [...prev, newTab]);
+    setActiveKey(key);
     newTabIndex.current += 1;
-    setItems(newPanes);
-    setActiveKey(newActiveKey);
   };
 
   const remove = (targetKey) => {
@@ -129,6 +79,11 @@ const BodyContent = () => {
       remove(targetKey);
     }
   };
+  const updateTab = (key, field, value) => {
+    setTabsData((prev) =>
+      prev.map((tab) => (tab.key === key ? { ...tab, [field]: value } : tab))
+    );
+  };
 
   return (
     <div>
@@ -146,8 +101,61 @@ const BodyContent = () => {
           onChange={onChange}
           activeKey={activeKey}
           onEdit={onEdit}
-          items={items}
-          hideAdd={false}
+          items={tabsData.map((tab) => ({
+            label: tab.label,
+            key: tab.key,
+            children: (
+              <Layout>
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Layout: {
+                        siderBg: "#607B8B",
+                      },
+                    },
+                  }}
+                >
+                  <Sider width={250}>
+                    <div style={{ padding: "20px" }}>
+                      <HistoryButton />
+                      <SubmitButton result={tab.result} searchType={tab.searchType} />
+                    </div>
+                  </Sider>
+                </ConfigProvider>
+                <Layout style={{ background: "#cbd7e2" }}>
+                  <Header
+                    style={{
+                      padding: "0 16px",
+                      background: "#cbd7e2",
+                      height: "auto",
+                    }}
+                  >
+                    <div>
+                      {/* {console.log(tab.key)} */}
+                      <SearchHeader
+                        setSearchType={(val) =>
+                          updateTab(tab.key, "searchType", val)
+                        }
+                        setRequire={(val) => updateTab(tab.key, "require", val)}
+                      />
+                    </div>
+                  </Header>
+                  <Content
+                    style={{
+                      margin: "10px 16px",
+                      background: "#cbd7e2",
+                    }}
+                  >
+                    <SearchResults
+                      searchType={tab.searchType}
+                      require={tab.require}
+                      setResult={(val) => updateTab(tab.key, "result", val)}
+                    />
+                  </Content>
+                </Layout>
+              </Layout>
+            ),
+          }))}
         />
       </ConfigProvider>
     </div>
