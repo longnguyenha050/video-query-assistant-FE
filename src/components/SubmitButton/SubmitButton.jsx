@@ -29,11 +29,11 @@ const SubmitButton = ({ result, searchType }) => {
     // Tạo dữ liệu CSV
     if (searchType === "Q&A Search") {
       rows = result
-        .map((item) => `${item.folder_key}_${item.video_key},${item.timestamp},${item.answer}`)
+        .map((item) => `${item.folder_key}_${item.video_key},${item.frame_key},${item.answer}`)
         .join("\n");
     } else if (searchType === "Single Text Search" || searchType === "OCR and OD Search") {
       rows = result
-        .map((item) => `${item.folder_key}_${item.video_key},${item.timestamp}`)
+        .map((item) => `${item.folder_key}_${item.video_key},${item.frame_key}`)
         .join("\n");
     }
 

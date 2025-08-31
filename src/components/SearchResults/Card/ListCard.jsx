@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SingleTextSearchCard from "./SingleTextSearchCard";
 import QASearchCard from "./QASearchCard";
 import { Flex } from "antd";
-import { Pagination } from "antd";
+import { Pagination, Spin } from "antd";
 import {
   singleTextSearch,
   QASearch,
@@ -13,6 +13,7 @@ import styles from "./ListCard.module.css";
 const PAGE_SIZE = 40;
 
 const ListCard = ({ searchType, require, setResult }) => {
+  const [loading, setLoading] = useState(false);
   const [current, setCurrent] = useState(1);
   const [fullData, setFullData] = useState([]);
   const [data, setData] = useState([]);
@@ -35,6 +36,7 @@ const ListCard = ({ searchType, require, setResult }) => {
   };
 
   const getData = async () => {
+    setLoading(true); // Bắt đầu loading
     let data;
     if (require && Object.keys(require).length > 0) {
       switch (searchType) {
@@ -70,10 +72,11 @@ const ListCard = ({ searchType, require, setResult }) => {
 
     if (data) {
       console.log("data: ", data);
-      setResult(data.items)
+      setResult(data.items);
       setTotalImage(data.total_items);
       setFullData(data.items);
     }
+    setLoading(false); // Kết thúc loading
   };
 
   const getRandomImages = (page) => {
@@ -85,15 +88,26 @@ const ListCard = ({ searchType, require, setResult }) => {
     <React.Fragment>
       <div className={styles.pageContainer}>
         <div className={styles.imageContainer}>
-          <Flex wrap gap="large">
-            {searchType === "Single Text Search" || searchType === "OCR and OD Search"
-              ? data.map((item) => (
-                  <SingleTextSearchCard key={item.id} img={item} />
-                ))
-              : searchType === "Q&A Search"
-              ? data.map((item) => <QASearchCard key={item.id} img={item} />)
-              : null}
-          </Flex>
+          {loading ? (
+            <Flex
+              justify="center"
+              align="center"
+              style={{ width: "100%", minHeight: "200px" }}
+            >
+              <Spin size="large" tip="Loading..." />
+            </Flex>
+          ) : (
+            <Flex wrap gap="large">
+              {searchType === "Single Text Search" ||
+              searchType === "OCR and OD Search"
+                ? data.map((item) => (
+                    <SingleTextSearchCard key={item.id} img={item} />
+                  ))
+                : searchType === "Q&A Search"
+                ? data.map((item) => <QASearchCard key={item.id} img={item} />)
+                : null}
+            </Flex>
+          )}
         </div>
         <div className={styles.paginationContainer}>
           <Pagination
